@@ -1,11 +1,10 @@
-const path = require('path');
-require('electron-reload')(__dirname, {
-  electron: path.join(__dirname, 'node_modules', '.bin', 'electron')
-});
-
 const { app, BrowserWindow, Menu, ipcMain, dialog } = require("electron");
+const path = require("path");
 const fs = require("fs");
 const ignore = require("ignore");
+require("electron-reload")(__dirname, {
+  electron: path.join(__dirname, "node_modules", ".bin", "electron"),
+});
 
 let mainWindow;
 
@@ -54,14 +53,14 @@ function getFilesAndFolders(dir) {
       results.push({
         name: file,
         path: filePath,
-        type: 'folder',
-        children: getFilesAndFolders(filePath) // Recursively get subfolder content
+        type: "folder",
+        children: getFilesAndFolders(filePath), // Recursively get subfolder content
       });
     } else {
       results.push({
         name: file,
         path: filePath,
-        type: 'file'
+        type: "file",
       });
     }
   });
@@ -69,17 +68,54 @@ function getFilesAndFolders(dir) {
   return results;
 }
 
-ipcMain.handle("select-folder", async (event) => {
-  const result = await dialog.showOpenDialog(mainWindow, {
-    properties: ["openDirectory"],
-  });
-  if (result.filePaths.length > 0) {
-    const folderPath = result.filePaths[0];
+// *********************
+ipcMain.handle('select-folder', async (event, folderPath) => {
+  try {
+    if (!folderPath) {
+      const result = await dialog.showOpenDialog({
+        properties: ['openDirectory']
+      });
+      folderPath = result.filePaths[0];
+    }
+
+    if (!folderPath) {
+      return null;
+    }
+
+    const getFilesAndFolders = (folderPath) => {
+      const items = fs.readdirSync(folderPath);
+      return items.map(item => {
+        const itemPath = path.join(folderPath, item);
+        const isDirectory = fs.statSync(itemPath).isDirectory();
+        return {
+          name: item,
+          path: itemPath,
+          type: isDirectory ? 'folder' : 'file',
+          children: isDirectory ? getFilesAndFolders(itemPath) : []
+        };
+      });
+    };
+
     const filesAndFolders = getFilesAndFolders(folderPath);
     return { folderPath, filesAndFolders };
+  } catch (error) {
+    console.error(`Error occurred in handler for 'select-folder': ${error.message}`);
+    throw error;
   }
-  return null;
 });
+
+// ipcMain.handle("select-folder", async (event) => {
+//   const result = await dialog.showOpenDialog(mainWindow, {
+//     properties: ["openDirectory"],
+//   });
+//   if (result.filePaths.length > 0) {
+//     const folderPath = result.filePaths[0];
+//     const filesAndFolders = getFilesAndFolders(folderPath);
+//     return { folderPath, filesAndFolders };
+//   }
+//   return null;
+// });
+// *********************
 
 ipcMain.handle("process-files", async (event, selectedFiles) => {
   let outputContent = "";
@@ -87,7 +123,9 @@ ipcMain.handle("process-files", async (event, selectedFiles) => {
   selectedFiles.forEach((file) => {
     if (fs.statSync(file).isFile()) {
       const fileContent = fs.readFileSync(file, "utf-8");
-      outputContent += `${path.basename(file)}\n\`\`\`\n${fileContent}\n\`\`\`\n\n`;
+      outputContent += `${path.basename(
+        file
+      )}\n\`\`\`\n${fileContent}\n\`\`\`\n\n`;
     }
   });
 
