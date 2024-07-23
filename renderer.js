@@ -77,7 +77,9 @@ document.getElementById("select-folder").addEventListener("click", async () => {
 
     // Add event listener to "Select All" button
     document.getElementById("select-all").addEventListener("click", () => {
-      const checkboxes = document.querySelectorAll("#file-list input[type=checkbox]");
+      const checkboxes = document.querySelectorAll(
+        "#file-list input[type=checkbox]"
+      );
       checkboxes.forEach((checkbox) => {
         checkbox.checked = true;
         const event = new Event("change");
@@ -86,22 +88,26 @@ document.getElementById("select-folder").addEventListener("click", async () => {
     });
 
     // Add event listener to "Deselect All" button
-    document.getElementById("deselect-all").addEventListener("click", async () => {
-      const checkboxes = document.querySelectorAll("#file-list input[type=checkbox]");
-      const selectedFiles = [];
-    
-      // Deselect all checkboxes without triggering change event
-      checkboxes.forEach((checkbox) => {
-        checkbox.checked = false;
-        selectedFiles.push(checkbox.value);
+    document
+      .getElementById("deselect-all")
+      .addEventListener("click", async () => {
+        const checkboxes = document.querySelectorAll(
+          "#file-list input[type=checkbox]"
+        );
+        const selectedFiles = [];
+
+        // Deselect all checkboxes without triggering change event
+        checkboxes.forEach((checkbox) => {
+          checkbox.checked = false;
+          selectedFiles.push(checkbox.value);
+        });
+
+        // Process deselected files
+        const outputContent = await ipcRenderer.invoke("process-files", []);
+        const outputElement = document.getElementById("output");
+        outputElement.value = outputContent;
+        document.getElementById("copy-output").disabled = true;
       });
-    
-      // Process deselected files
-      const outputContent = await ipcRenderer.invoke("process-files", []);
-      const outputElement = document.getElementById("output");
-      outputElement.value = outputContent;
-      document.getElementById("copy-output").disabled = true;
-    });    
 
     // Add event listener to "Select Non-Ignored Files" button
     // document
@@ -120,6 +126,11 @@ document.getElementById("select-folder").addEventListener("click", async () => {
     //       checkbox.dispatchEvent(event);
     //     });
     //   });
+
+    // TODO add "Select Non-Ignored Files" feature
+    // the "Select Non-Ignored Files" feature didn't work properly so i commented them. please uncomment those codes and fix the issue.
+    // when i click the "Select Non-Ignored" i wanted to select the all files except the files and folders where they are mentioned in the content of .gitignore file.
+    // when we have a name of a folder in the content of .gitignore file, don't need to go throw the files of that folder
   }
 });
 
