@@ -1,0 +1,78 @@
+{
+  "name": "file_content_picker",
+  "version": "0.0.0",
+  "description": "File Content Picker is a tool that helps you easily select project files and prepare their content for quick copy-paste into chatbots or other interfaces. Enhance productivity and streamline sharing with this convenient app.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "clean": "rimraf dist",
+    "pack": "npm run clean && electron-builder --dir",
+    "build": "npm run clean && electron-builder"
+  },
+  "build": {
+    "appId": "com.file_content_picker",
+    "productName": "File Content Picker",
+    "files": [
+      "assets/**/*",
+      "node_modules/**/*",
+      "index.html",
+      "main.js",
+      "package.json",
+      "renderer.js"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "assets/icon.icns"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb",
+        "rpm"
+      ],
+      "icon": "assets/icon.png"
+    }
+  },
+  "keywords": [
+    "FileContent",
+    "ContentPicker",
+    "FileContentPicker",
+    "Snippet",
+    "Scribe",
+    "CodePicker",
+    "Copy",
+    "Paste",
+    "Snippet",
+    "CodeSnippet",
+    "Snippetizer",
+    "Clipper",
+    "Select",
+    "Share",
+    "SelectNShare",
+    "SnippetManager",
+    "ProjectPicker",
+    "ShareSnippet",
+    "CodeConvey",
+    "CodeExporter",
+    "SnippetStream",
+    "CodeExtract"
+  ],
+  "author": "Amin Sajedian",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "ignore": "^5.3.1"
+  },
+  "devDependencies": {
+    "electron": "^31.0.1",
+    "electron-builder": "^23.6.0",
+    "rimraf": "^5.0.7"
+  }
+}
