@@ -131,7 +131,7 @@ const displayFolderContents = async (folderPath) => {
       errorMessageElement.textContent = "";
     }
   } catch (error) {
-    // console.error(`Failed to display folder contents: ${error.message}`);
+    console.error(`Failed to display folder contents: ${error.message}`);
 
     // Clear the file list and output
     document.getElementById("file-list").innerHTML = "";

@@ -12,14 +12,14 @@
       button {
         margin: 5px 0;
       }
-      #selected-folder-title {
+      #folder-path-title {
         margin-top: 8px;
         margin-bottom: 0;
       }
       #folder-path {
         width: 100%;
         padding: 5px;
-        margin-top: 10px;
+        margin-top: 5px;
         border: solid black 1px;
         min-height: 20px;
       }
@@ -83,8 +83,8 @@
   </head>
   <body>
     <h1>File Content Picker</h1>
-    <button id="select-folder">Select Folder</button>
-    <h4 id="selected-folder-title">Selected Folder</h4>
+  
+    <h4 id="folder-path-title"><button id="select-folder">📁</button> Folder Path:</h4>
     <input type="text" id="folder-path" />
     <div id="error-message" style="color: red; margin-top: 10px;"></div>
     <div id="content">
