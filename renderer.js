@@ -86,14 +86,22 @@ document.getElementById("select-folder").addEventListener("click", async () => {
     });
 
     // Add event listener to "Deselect All" button
-    document.getElementById("deselect-all").addEventListener("click", () => {
+    document.getElementById("deselect-all").addEventListener("click", async () => {
       const checkboxes = document.querySelectorAll("#file-list input[type=checkbox]");
+      const selectedFiles = [];
+    
+      // Deselect all checkboxes without triggering change event
       checkboxes.forEach((checkbox) => {
         checkbox.checked = false;
-        const event = new Event("change");
-        checkbox.dispatchEvent(event);
+        selectedFiles.push(checkbox.value);
       });
-    });
+    
+      // Process deselected files
+      const outputContent = await ipcRenderer.invoke("process-files", []);
+      const outputElement = document.getElementById("output");
+      outputElement.value = outputContent;
+      document.getElementById("copy-output").disabled = true;
+    });    
 
     // Add event listener to "Select Non-Ignored Files" button
     // document
