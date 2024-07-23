@@ -73,6 +73,7 @@
   "devDependencies": {
     "electron": "^31.0.1",
     "electron-builder": "^23.6.0",
+    "electron-reload": "^2.0.0-alpha.1",
     "rimraf": "^5.0.7"
   }
 }
