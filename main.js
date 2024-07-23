@@ -1,5 +1,4 @@
-const path = require('path')
-
+const path = require('path');
 require('electron-reload')(__dirname, {
   electron: path.join(__dirname, 'node_modules', '.bin', 'electron')
 });
@@ -43,28 +42,52 @@ app.on("activate", () => {
   }
 });
 
+function getFilesAndFolders(dir) {
+  let results = [];
+  const list = fs.readdirSync(dir);
+
+  list.forEach((file) => {
+    const filePath = path.join(dir, file);
+    const stat = fs.statSync(filePath);
+
+    if (stat && stat.isDirectory()) {
+      results.push({
+        name: file,
+        path: filePath,
+        type: 'folder',
+        children: getFilesAndFolders(filePath) // Recursively get subfolder content
+      });
+    } else {
+      results.push({
+        name: file,
+        path: filePath,
+        type: 'file'
+      });
+    }
+  });
+
+  return results;
+}
+
 ipcMain.handle("select-folder", async (event) => {
   const result = await dialog.showOpenDialog(mainWindow, {
     properties: ["openDirectory"],
   });
   if (result.filePaths.length > 0) {
     const folderPath = result.filePaths[0];
-    const files = fs
-      .readdirSync(folderPath)
-      .filter((file) => fs.statSync(path.join(folderPath, file)).isFile());
-    return { folderPath, files };
+    const filesAndFolders = getFilesAndFolders(folderPath);
+    return { folderPath, filesAndFolders };
   }
   return null;
 });
 
-ipcMain.handle("process-files", async (event, folderPath, selectedFiles) => {
+ipcMain.handle("process-files", async (event, selectedFiles) => {
   let outputContent = "";
 
   selectedFiles.forEach((file) => {
-    const filePath = path.join(folderPath, file);
-    if (fs.statSync(filePath).isFile()) {
-      const fileContent = fs.readFileSync(filePath, "utf-8");
-      outputContent += `${file}\n\`\`\`\n${fileContent}\n\`\`\`\n\n`;
+    if (fs.statSync(file).isFile()) {
+      const fileContent = fs.readFileSync(file, "utf-8");
+      outputContent += `${path.basename(file)}\n\`\`\`\n${fileContent}\n\`\`\`\n\n`;
     }
   });
 
