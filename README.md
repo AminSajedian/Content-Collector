@@ -48,10 +48,11 @@ The **Content Collector** app is structured to separate concerns between the use
 
 ## Task List
 
-- [ ] **Fix bug having multiple subfolders**: Modify functionality when a user select a folder with a log of subfolders.
+- [ ] **Resolve having multiple subfolders bug**: Modify functionality when a user select a folder with a log of subfolders.
 - [ ] **Improve UI Design**: Update the design for better user experience and responsiveness.
 - [ ] **Add Unit Tests**: Write unit tests for critical components and functions.
 - [ ] **Create User Documentation**: Prepare a detailed user guide and documentation.
 - [ ] **Add Dark Mode**: Implement a dark mode theme for the application.
 - [ ] **Support Multiple Languages**: Add localization support for different languages.
 - [ ] **update folder icon button**: Add border around the folder icon and so on to make it clear that this is a button.
+- [ ] **Resolve Failed to display folder contents bug**: for some folders it shows this error: "Failed to display folder contents" for example for this folder: "Documents"
