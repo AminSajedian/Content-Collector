@@ -3,41 +3,79 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>File Content Picker</title>
-    <link rel="stylesheet" href="styles.css" />
+    <title>Content Collector</title>
+    <link href="output.css" rel="stylesheet" />
   </head>
-  <body>
-    <h1 id="app-name">File Content Picker</h1>
-    <h4 id="folder-path-title">
-      <button id="select-folder">📁</button> Folder Path
-    </h4>
-    <input type="text" id="folder-path" />
-    <div id="error-message" style="color: red; margin-top: 10px"></div>
+  <body class="bg-gray-100 p-4">
+    <h1 id="app-name" class="text-2xl font-bold mb-4">Content Collector</h1>
 
-    <h4 id="requests-title">Requests</h4>
-    <div id="requests-container">
-      <textarea id="requests" placeholder="Enter your requests here..."></textarea>
-      <button id="copy-all">Copy</button>
+    <div class="mb-4">
+      <h4 id="folder-path-title" class="text-lg flex items-center mb-2">
+        <button id="select-folder" class="mr-2 text-blue-600">📁</button> Folder
+        Path
+      </h4>
+      <input
+        type="text"
+        id="folder-path"
+        class="w-full p-2 border border-gray-300 rounded"
+      />
+      <div id="error-message" class="text-red-500 mt-2"></div>
     </div>
 
-    <div id="content">
-      <div id="file-list-section">
-        <h4 id="file-list-title">File List</h4>
-        <div id="file-list-area">
-          <div id="file-list-control">
-            <button id="select-all">Select All</button>
-            <button id="deselect-all">Deselect All</button>
+    <div class="mb-4">
+      <h4 id="requests-title" class="text-lg mb-2">Requests</h4>
+      <div id="requests-container" class="flex items-center space-x-2">
+        <textarea
+          id="requests"
+          placeholder="Enter your requests here..."
+          class="flex-1 p-2 border border-gray-300 rounded"
+        ></textarea>
+        <button id="copy-all" class="p-2 bg-blue-600 text-white rounded">
+          Copy
+        </button>
+      </div>
+    </div>
+
+    <div id="content" class="flex space-x-4">
+      <div id="file-list-section" class="flex-1">
+        <h4 id="file-list-title" class="text-lg mb-2">File List</h4>
+        <div
+          id="file-list-area"
+          class="border border-gray-300 rounded p-2 h-80 overflow-auto"
+        >
+          <div
+            id="file-list-control"
+            class="flex justify-evenly border-b border-gray-300 pb-2 mb-2"
+          >
+            <button id="select-all" class="p-2 bg-blue-600 text-white rounded">
+              Select All
+            </button>
+            <button id="deselect-all" class="p-2 bg-red-600 text-white rounded">
+              Deselect All
+            </button>
           </div>
           <div id="file-list"></div>
         </div>
       </div>
-      <div id="files-content-section">
-        <div id="files-content-title">
-          <label for="files-content" id="files-content-label">Files Content</label>
+
+      <div id="files-content-section" class="flex-1">
+        <div
+          id="files-content-title"
+          class="flex justify-between items-center mb-2"
+        >
+          <label for="files-content" id="files-content-label" class="font-bold"
+            >Files Content</label
+          >
         </div>
-        <textarea type="text" id="files-content" name="files-content" readonly></textarea>
+        <textarea
+          id="files-content"
+          name="files-content"
+          readonly
+          class="w-full h-80 p-2 border border-gray-300 rounded resize-none"
+        ></textarea>
       </div>
     </div>
+
     <script src="renderer.js"></script>
   </body>
 </html>

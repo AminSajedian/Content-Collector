@@ -2,16 +2,19 @@ const { app, BrowserWindow, Menu, ipcMain, dialog } = require("electron");
 const path = require("path");
 const fs = require("fs");
 const ignore = require("ignore");
-require("electron-reload")(__dirname, {
-  electron: path.join(__dirname, "node_modules", ".bin", "electron"),
-});
+
+// if (process.env.NODE_ENV !== 'production') {
+//   require("electron-reload")(__dirname, {
+//     electron: path.join(__dirname, "node_modules", ".bin", "electron"),
+//   });
+// }
 
 let mainWindow;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 800,
-    height: 680,
+    height: 720,
     icon: path.join(__dirname, "assets", "icon.ico"),
     webPreferences: {
       preload: path.join(__dirname, "renderer.js"),
@@ -68,7 +71,6 @@ function getFilesAndFolders(dir) {
   return results;
 }
 
-// *********************
 ipcMain.handle('select-folder', async (event, folderPath) => {
   try {
     if (!folderPath) {
@@ -103,19 +105,6 @@ ipcMain.handle('select-folder', async (event, folderPath) => {
     throw error;
   }
 });
-
-// ipcMain.handle("select-folder", async (event) => {
-//   const result = await dialog.showOpenDialog(mainWindow, {
-//     properties: ["openDirectory"],
-//   });
-//   if (result.filePaths.length > 0) {
-//     const folderPath = result.filePaths[0];
-//     const filesAndFolders = getFilesAndFolders(folderPath);
-//     return { folderPath, filesAndFolders };
-//   }
-//   return null;
-// });
-// *********************
 
 ipcMain.handle("process-files", async (event, selectedFiles) => {
   let outputContent = "";

@@ -1,49 +1,17 @@
 {
-  "name": "file_content_picker",
-  "version": "0.0.0",
-  "description": "File Content Picker is a tool that helps you easily select project files and prepare their content for quick copy-paste into chatbots or other interfaces. Enhance productivity and streamline sharing with this convenient app.",
+  "name": "content_collector",
+  "version": "1.0.0",
+  "description": "Content Collector is a tool that helps you easily select project files and prepare their content for quick copy-paste into chatbots or other interfaces. Enhance productivity and streamline sharing with this convenient app.",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "clean": "rimraf dist",
-    "pack": "npm run clean && electron-builder --dir",
-    "build": "npm run clean && electron-builder"
-  },
-  "build": {
-    "appId": "com.file_content_picker",
-    "productName": "File Content Picker",
-    "files": [
-      "assets/**/*",
-      "node_modules/**/*",
-      "index.html",
-      "main.js",
-      "package.json",
-      "renderer.js"
-    ],
-    "directories": {
-      "buildResources": "assets"
-    },
-    "win": {
-      "target": "nsis",
-      "icon": "assets/icon.ico"
-    },
-    "mac": {
-      "target": "dmg",
-      "icon": "assets/icon.icns"
-    },
-    "linux": {
-      "target": [
-        "AppImage",
-        "deb",
-        "rpm"
-      ],
-      "icon": "assets/icon.png"
-    }
+    "build": "cross-env electron-builder",
+    "pack": "cross-env electron-builder --dir",
+    "clean": "rimraf dist"
   },
   "keywords": [
+    "ContentCollector",
     "FileContent",
-    "ContentPicker",
-    "FileContentPicker",
     "Snippet",
     "Scribe",
     "CodePicker",
@@ -68,12 +36,52 @@
   "license": "MIT",
   "dependencies": {
     "dotenv": "^16.4.5",
+    "electron-context-menu": "^4.0.1",
     "ignore": "^5.3.1"
   },
   "devDependencies": {
     "electron": "^31.0.1",
     "electron-builder": "^23.6.0",
     "electron-reload": "^2.0.0-alpha.1",
-    "rimraf": "^5.0.7"
+    "rimraf": "^5.0.7",
+    "tailwindcss": "^3.4.6"
+  },
+  "build": {
+    "appId": "com.content_collector",
+    "productName": "Content Collector",
+    "files": [
+      "assets/**/*",
+      "node_modules/**/*",
+      "index.html",
+      "LICENSE",
+      "main.js",
+      "output.css",
+      "package.json",
+      "renderer.js"
+    ],
+    "directories": {
+      "buildResources": "assets",
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "assets/icon.icns"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb",
+        "rpm"
+      ],
+      "icon": "assets/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
   }
 }

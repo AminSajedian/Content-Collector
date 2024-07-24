@@ -1,6 +1,6 @@
-# File Content Picker App
+# Content Collector App
 
-The **File Content Picker** app is an Electron-based tool designed to enhance productivity by simplifying the process of selecting project files and preparing their content for quick copy-paste into chatbots or other interfaces. This convenient application streamlines file handling and sharing by allowing users to easily select files from a folder and compile their contents for efficient use. Below is a detailed breakdown of the app's components, functionality, and code structure.
+The **Content Collector** app is an Electron-based tool designed to enhance productivity by simplifying the process of selecting project files and preparing their content for quick copy-paste into chatbots or other interfaces. This convenient application streamlines file handling and sharing by allowing users to easily select files from a folder and compile their contents for efficient use. Below is a detailed breakdown of the app's components, functionality, and code structure.
 
 ## Project Structure
 
@@ -44,4 +44,14 @@ The `renderer.js` file is the renderer process script that interacts with the Do
 
 ## Summary
 
-The **File Content Picker** app is structured to separate concerns between the user interface (handled by `index.html` and `renderer.js`) and the application logic (handled by `main.js`). The `package.json` file ensures proper management of dependencies and build scripts. This modular approach facilitates maintenance and scalability of the application.
+The **Content Collector** app is structured to separate concerns between the user interface (handled by `index.html` and `renderer.js`) and the application logic (handled by `main.js`). The `package.json` file ensures proper management of dependencies and build scripts. This modular approach facilitates maintenance and scalability of the application.
+
+## Task List
+
+- [ ] **Fix bug having multiple subfolders**: Modify functionality when a user select a folder with a log of subfolders.
+- [ ] **Improve UI Design**: Update the design for better user experience and responsiveness.
+- [ ] **Add Unit Tests**: Write unit tests for critical components and functions.
+- [ ] **Create User Documentation**: Prepare a detailed user guide and documentation.
+- [ ] **Add Dark Mode**: Implement a dark mode theme for the application.
+- [ ] **Support Multiple Languages**: Add localization support for different languages.
+- [ ] **update folder icon button**: Add border around the folder icon and so on to make it clear that this is a button.
