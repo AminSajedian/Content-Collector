@@ -5,8 +5,8 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "cross-env electron-builder",
-    "pack": "cross-env electron-builder --dir",
+    "build": "electron-builder",
+    "pack": "electron-builder --dir",
     "clean": "rimraf dist"
   },
   "keywords": [
