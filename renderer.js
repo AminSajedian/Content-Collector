@@ -124,7 +124,7 @@ const displayFolderContents = async (folderPath) => {
 
     // Display the error message
     const errorMessageElement = document.getElementById("error-message");
-    errorMessageElement.textContent = `Failed to display folder contents: ${error.message}`;
+    errorMessageElement.textContent = `Failed to display folder contents`;
   }
 };
 
@@ -139,20 +139,20 @@ document.getElementById("folder-path").addEventListener("input", (event) => {
   }
 });
 
-// Add event listener for the "Copy Prompts" button
+// Add event listener for the "Copy Requests" button
 document.getElementById("copy-all").addEventListener("click", async () => {
-  const promptsElement = document.getElementById("prompts");
+  const requestsElement = document.getElementById("requests");
   const filesContentElement = document.getElementById("files-content");
   try {
-    if (promptsElement.value) {
+    if (requestsElement.value) {
       await navigator.clipboard.writeText(
-        `${promptsElement.value}\n\n${filesContentElement.value}`
+        `${requestsElement.value}\n\n${filesContentElement.value}`
       );
     } else {
       await navigator.clipboard.writeText(`${filesContentElement.value}`);
     }
-    // alert("Prompts and Files Content copied to clipboard!");
+    // alert("Requests and Files Content copied to clipboard!");
   } catch (err) {
-    alert("Failed to copy Prompts and Files Content to clipboard.");
+    alert("Failed to copy Requests and Files Content to clipboard.");
   }
 });
