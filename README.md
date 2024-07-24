@@ -49,7 +49,7 @@ The **Content Collector** app is structured to separate concerns between the use
 ## Task List
 
 - [ ] **Resolve having multiple subfolders bug**: Modify functionality when a user select a folder with a log of subfolders.
-- [ ] **Improve UI Design**: Update the design for better user experience and responsiveness.
+- [ ] **Improve UI Design**: Update the design for better user experience and responsiveness. chose proper headings base on their position. make them bold, change the space length around the elements.
 - [ ] **Add Unit Tests**: Write unit tests for critical components and functions.
 - [ ] **Create User Documentation**: Prepare a detailed user guide and documentation.
 - [ ] **Add Dark Mode**: Implement a dark mode theme for the application.
