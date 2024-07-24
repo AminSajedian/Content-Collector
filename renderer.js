@@ -13,14 +13,17 @@ const displayFolderContents = async (folderPath) => {
       const createFileTree = (filesAndFolders, parentElement) => {
         filesAndFolders.forEach((item) => {
           const itemElement = document.createElement("div");
-          itemElement.style.marginLeft = "20px";
+          itemElement.style.marginLeft = "5px";
 
           if (item.type === "folder") {
-            const folderToggle = document.createElement("button");
+            const folderToggle = document.createElement("span");
             folderToggle.textContent = "►";
+            folderToggle.style.cursor = "pointer";
+            folderToggle.style.marginLeft = "4px";
             folderToggle.style.marginRight = "5px";
             folderToggle.addEventListener("click", () => {
-              const folderContent = itemElement.querySelector(".folder-content");
+              const folderContent =
+                itemElement.querySelector(".folder-content");
               if (folderContent.style.display === "none") {
                 folderContent.style.display = "block";
                 folderToggle.textContent = "▼";
@@ -59,14 +62,13 @@ const displayFolderContents = async (folderPath) => {
               const selectedFiles = Array.from(
                 document.querySelectorAll("#file-list input:checked")
               ).map((checkbox) => checkbox.value);
-              const outputContent = await ipcRenderer.invoke(
+              const filesContent = await ipcRenderer.invoke(
                 "process-files",
                 selectedFiles
               );
-              const outputElement = document.getElementById("output");
-              outputElement.value = outputContent;
-              document.getElementById("copy-output").disabled =
-                selectedFiles.length === 0;
+              const filesContentElement =
+                document.getElementById("files-content");
+              filesContentElement.value = filesContent;
             });
           }
 
@@ -89,42 +91,25 @@ const displayFolderContents = async (folderPath) => {
       });
 
       // Add event listener to "Deselect All" button
-      document.getElementById("deselect-all").addEventListener("click", async () => {
-        const checkboxes = document.querySelectorAll(
-          "#file-list input[type=checkbox]"
-        );
-        const selectedFiles = [];
+      document
+        .getElementById("deselect-all")
+        .addEventListener("click", async () => {
+          const checkboxes = document.querySelectorAll(
+            "#file-list input[type=checkbox]"
+          );
+          const selectedFiles = [];
 
-        // Deselect all checkboxes without triggering change event
-        checkboxes.forEach((checkbox) => {
-          checkbox.checked = false;
-          selectedFiles.push(checkbox.value);
+          // Deselect all checkboxes without triggering change event
+          checkboxes.forEach((checkbox) => {
+            checkbox.checked = false;
+            selectedFiles.push(checkbox.value);
+          });
+
+          // Process deselected files
+          const filesContent = await ipcRenderer.invoke("process-files", []);
+          const filesContentElement = document.getElementById("files-content");
+          filesContentElement.value = filesContent;
         });
-
-        // Process deselected files
-        const outputContent = await ipcRenderer.invoke("process-files", []);
-        const outputElement = document.getElementById("output");
-        outputElement.value = outputContent;
-        document.getElementById("copy-output").disabled = true;
-      });
-
-      // Add event listener to "Select Non-Ignored Files" button
-      // document
-      //   .getElementById("select-non-ignored")
-      //   .addEventListener("click", async () => {
-      //     const nonIgnoredFiles = await ipcRenderer.invoke(
-      //       "get-non-ignored-files",
-      //       folderPath
-      //     );
-      //     const checkboxes = document.querySelectorAll(
-      //       "#file-list input[type=checkbox]"
-      //     );
-      //     checkboxes.forEach((checkbox) => {
-      //       checkbox.checked = nonIgnoredFiles.includes(checkbox.value);
-      //       const event = new Event("change");
-      //       checkbox.dispatchEvent(event);
-      //     });
-      //   });
 
       // Display the error message
       const errorMessageElement = document.getElementById("error-message");
@@ -133,14 +118,13 @@ const displayFolderContents = async (folderPath) => {
   } catch (error) {
     console.error(`Failed to display folder contents: ${error.message}`);
 
-    // Clear the file list and output
+    // Clear the file list and files content
     document.getElementById("file-list").innerHTML = "";
-    document.getElementById("output").value = "";
-    document.getElementById("copy-output").disabled = true;
+    document.getElementById("files-content").value = "";
 
     // Display the error message
     const errorMessageElement = document.getElementById("error-message");
-    errorMessageElement.textContent = `Failed to display folder contents`;
+    errorMessageElement.textContent = `Failed to display folder contents: ${error.message}`;
   }
 };
 
@@ -155,12 +139,20 @@ document.getElementById("folder-path").addEventListener("input", (event) => {
   }
 });
 
-document.getElementById("copy-output").addEventListener("click", async () => {
-  const outputElement = document.getElementById("output");
+// Add event listener for the "Copy Prompts" button
+document.getElementById("copy-all").addEventListener("click", async () => {
+  const promptsElement = document.getElementById("prompts");
+  const filesContentElement = document.getElementById("files-content");
   try {
-    await navigator.clipboard.writeText(outputElement.value);
-    alert("Output copied to clipboard!");
+    if (promptsElement.value) {
+      await navigator.clipboard.writeText(
+        `${promptsElement.value}\n\n${filesContentElement.value}`
+      );
+    } else {
+      await navigator.clipboard.writeText(`${filesContentElement.value}`);
+    }
+    // alert("Prompts and Files Content copied to clipboard!");
   } catch (err) {
-    alert("Failed to copy output to clipboard.");
+    alert("Failed to copy Prompts and Files Content to clipboard.");
   }
 });

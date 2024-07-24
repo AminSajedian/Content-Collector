@@ -7,28 +7,54 @@
     <style>
       body {
         font-family: Arial, sans-serif;
-        padding: 20px;
+        padding: 5px 8px;
+      }
+      #app-name {
+        margin-top: 0;
+        margin-bottom: 5px;
       }
       button {
         margin: 5px 0;
       }
       #folder-path-title {
-        margin-top: 8px;
-        margin-bottom: 0;
+        margin-top: 0;
+        margin-bottom: 3px;
       }
       #folder-path {
-        width: 100%;
+        width: 99%;
         padding: 5px;
-        margin-top: 5px;
+        margin-bottom: 5px;
         border: solid black 1px;
         min-height: 20px;
       }
+      #prompts-title {
+        margin-top: 0px;
+        margin-bottom: 5px;
+      }
+      #prompts-container {
+        display: flex;
+        align-items: center;
+        width: 99%;
+        margin-bottom: 10px;
+      }
+      #prompts {
+        flex: 1;
+        padding: 5px;
+        margin-top: 0px;
+        margin-right: 5px;
+        border: solid black 1px;
+        min-height: 40px;
+      }
+      #copy-all {
+        width: 50px;
+        padding: 5px;
+      }
       #file-list-title {
-        margin-bottom: 0;
-        margin-top: 16px;
+        margin-bottom: 8px;
+        margin-top: 0px;
       }
       #file-list {
-        margin-top: 10px;
+        margin-top: 0px;
       }
       #file-list-control {
         display: flex;
@@ -37,16 +63,16 @@
         justify-content: space-evenly;
         border-bottom: solid black 1px;
       }
-      #output-label {
+      #files-content-label {
         display: inline-block;
-        margin-top: 15px;
         font-weight: bold;
       }
-      #output-title {
+      #files-content-title {
         display: flex;
         flex-wrap: nowrap;
         flex-direction: row;
         justify-content: space-between;
+        margin-bottom: 8px;
       }
       .visibility-hidden {
         visibility: hidden;
@@ -57,54 +83,55 @@
         justify-content: space-between;
       }
       #file-list-section,
-      #output-section {
+      #files-content-section {
         flex: 1;
         margin-right: 20px;
       }
-      #output-section {
+      #files-content-section {
         margin-right: 0;
       }
-      #output {
-        margin-top: 10px;
-        width: 100%;
+      #files-content {
+        width: 99%;
         min-height: 320px;
         resize: none;
       }
       #file-list-area {
         border: solid black 1px;
-        margin-top: 10px;
-        width: 100%;
+        width: 99%;
         height: 320px;
-      }
-      h1 {
-        margin-top: 0;
       }
     </style>
   </head>
   <body>
-    <h1>File Content Picker</h1>
-  
-    <h4 id="folder-path-title"><button id="select-folder">📁</button> Folder Path:</h4>
+    <h1 id="app-name">File Content Picker</h1>
+    <h4 id="folder-path-title">
+      <button id="select-folder">📁</button> Folder Path
+    </h4>
     <input type="text" id="folder-path" />
-    <div id="error-message" style="color: red; margin-top: 10px;"></div>
+    <div id="error-message" style="color: red; margin-top: 10px"></div>
+
+    <h4 id="prompts-title">Prompts</h4>
+    <div id="prompts-container">
+      <textarea id="prompts" placeholder="Enter your requests here..."></textarea>
+      <button id="copy-all">Copy</button>
+    </div>
+
     <div id="content">
       <div id="file-list-section">
         <h4 id="file-list-title">File List</h4>
         <div id="file-list-area">
           <div id="file-list-control">
-            <!-- <button id="select-non-ignored">Select Non-Ignored</button> -->
             <button id="select-all">Select All</button>
             <button id="deselect-all">Deselect All</button>
           </div>
           <div id="file-list"></div>
         </div>
       </div>
-      <div id="output-section">
-        <div id="output-title">
-          <label for="output" id="output-label">Output</label>
-          <button id="copy-output" disabled>Copy Output</button>
+      <div id="files-content-section">
+        <div id="files-content-title">
+          <label for="files-content" id="files-content-label">Files Content</label>
         </div>
-        <textarea type="text" id="output" name="output"></textarea>
+        <textarea type="text" id="files-content" name="files-content" readonly></textarea>
       </div>
     </div>
     <script src="renderer.js"></script>
