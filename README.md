@@ -45,15 +45,3 @@ The `renderer.js` file is the renderer process script that interacts with the Do
 ## Summary
 
 The **Content Collector** app is structured to separate concerns between the user interface (handled by `index.html` and `renderer.js`) and the application logic (handled by `main.js`). The `package.json` file ensures proper management of dependencies and build scripts. This modular approach facilitates maintenance and scalability of the application.
-
-## Task List
-
-- [ ] **Resolve having multiple subfolders bug**: Modify functionality when a user select a folder with a log of subfolders.
-- [ ] **Improve UI Design**: Update the design for better user experience and responsiveness. chose proper headings base on their position. make them bold, change the space length around the elements.
-- [ ] **Add Unit Tests**: Write unit tests for critical components and functions.
-- [ ] **Create User Documentation**: Prepare a detailed user guide and documentation.
-- [ ] **Add Dark Mode**: Implement a dark mode theme for the application.
-- [ ] **Support Multiple Languages**: Add localization support for different languages.
-- [ ] **update folder icon button**: Add border around the folder icon and so on to make it clear that this is a button.
-- [ ] **Resolve Failed to display folder contents bug**: for some folders it shows this error: "Failed to display folder contents" for example for this folder: "Documents"
-- [ ] **copying or pasting text feature**: enable the right click feature to let the user copy or paste a text
