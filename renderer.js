@@ -144,15 +144,14 @@ document.getElementById("copy-all").addEventListener("click", async () => {
   const requestsElement = document.getElementById("requests");
   const filesContentElement = document.getElementById("files-content");
   try {
+    let textToCopy = filesContentElement.value;
     if (requestsElement.value) {
-      await navigator.clipboard.writeText(
-        `${requestsElement.value}\n\n${filesContentElement.value}`
-      );
-    } else {
-      await navigator.clipboard.writeText(`${filesContentElement.value}`);
+      textToCopy = `${requestsElement.value}\n\n${filesContentElement.value}`;
     }
-    // alert("Requests and Files Content copied to clipboard!");
+    await navigator.clipboard.writeText(textToCopy);
+    // Optionally, show a notification or alert indicating success
+    console.log("Content copied to clipboard!");
   } catch (err) {
-    alert("Failed to copy Requests and Files Content to clipboard.");
+    console.error("Failed to copy content to clipboard.", err);
   }
 });
