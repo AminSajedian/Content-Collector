@@ -1,13 +1,17 @@
-const { app, BrowserWindow, Menu, ipcMain, dialog } = require("electron");
+const { app, BrowserWindow, ipcMain, dialog } = require("electron");
 const path = require("path");
 const fs = require("fs");
 const ignore = require("ignore");
 
-// if (process.env.NODE_ENV !== 'production') {
-//   require("electron-reload")(__dirname, {
-//     electron: path.join(__dirname, "node_modules", ".bin", "electron"),
-//   });
-// }
+// Dynamically import electron-context-menu
+(async () => {
+  const contextMenu = (await import('electron-context-menu')).default;
+
+  contextMenu({
+    showCopyImageAddress: true,
+    showSaveImageAs: true,
+  });
+})();
 
 let mainWindow;
 
@@ -27,8 +31,6 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
-  // Remove the default menu
-  // Menu.setApplicationMenu(null);
   createWindow();
 });
 
@@ -43,33 +45,6 @@ app.on("activate", () => {
     createWindow();
   }
 });
-
-function getFilesAndFolders(dir) {
-  let results = [];
-  const list = fs.readdirSync(dir);
-
-  list.forEach((file) => {
-    const filePath = path.join(dir, file);
-    const stat = fs.statSync(filePath);
-
-    if (stat && stat.isDirectory()) {
-      results.push({
-        name: file,
-        path: filePath,
-        type: "folder",
-        children: getFilesAndFolders(filePath), // Recursively get subfolder content
-      });
-    } else {
-      results.push({
-        name: file,
-        path: filePath,
-        type: "file",
-      });
-    }
-  });
-
-  return results;
-}
 
 ipcMain.handle('select-folder', async (event, folderPath) => {
   try {
@@ -143,4 +118,14 @@ ipcMain.handle("get-non-ignored-files", async (event, folderPath) => {
   });
 
   return files;
+});
+
+ipcMain.handle('rename-folder', async (event, oldPath, newPath) => {
+  try {
+    fs.renameSync(oldPath, newPath);
+    return { success: true };
+  } catch (error) {
+    console.error(`Error occurred while renaming folder: ${error.message}`);
+    return { success: false, error: error.message };
+  }
 });

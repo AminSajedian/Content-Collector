@@ -36,8 +36,31 @@ const displayFolderContents = async (folderPath) => {
             const folderLabel = document.createElement("label");
             folderLabel.textContent = item.name;
 
+            const renameInput = document.createElement("input");
+            renameInput.type = "text";
+            renameInput.value = item.name;
+            renameInput.style.display = "none";
+
+            folderLabel.addEventListener("dblclick", () => {
+              folderLabel.style.display = "none";
+              renameInput.style.display = "inline";
+              renameInput.focus();
+            });
+
+            renameInput.addEventListener("blur", async () => {
+              const newPath = path.join(path.dirname(item.path), renameInput.value);
+              const renameResult = await ipcRenderer.invoke('rename-folder', item.path, newPath);
+              if (renameResult.success) {
+                item.path = newPath;
+                folderLabel.textContent = renameInput.value;
+              }
+              renameInput.style.display = "none";
+              folderLabel.style.display = "inline";
+            });
+
             itemElement.appendChild(folderToggle);
             itemElement.appendChild(folderLabel);
+            itemElement.appendChild(renameInput);
 
             const folderContent = document.createElement("div");
             folderContent.classList.add("folder-content");
@@ -153,5 +176,20 @@ document.getElementById("copy-all").addEventListener("click", async () => {
     console.log("Content copied to clipboard!");
   } catch (err) {
     console.error("Failed to copy content to clipboard.", err);
+  }
+});
+
+// Add dark mode toggle functionality
+document.getElementById("toggle-theme").addEventListener("click", () => {
+  const currentTheme = document.documentElement.getAttribute("data-theme");
+  const newTheme = currentTheme === "light" ? "dark" : "light";
+  document.documentElement.setAttribute("data-theme", newTheme);
+});
+
+// Add refresh button functionality
+document.getElementById("refresh-content").addEventListener("click", () => {
+  const folderPath = document.getElementById("folder-path").value;
+  if (folderPath) {
+    displayFolderContents(folderPath);
   }
 });

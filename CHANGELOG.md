@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0] - 2024-08-09
+
+### Added
+
+- Added subfolder files path to the Files Content display.
+- Enabled right-click feature for copying and pasting text.
+- Added dark mode theme to the application.
+- Added delay to path modification checking.
+- Added a loading feature (refresh button) to show the user that the app is processing files.
+- Resolved the bug with multiple subfolders.
+- Enabled users to rename folders within the app.
+
+### Updated
+
+- Changed the place of "Select All" and "Deselect All" buttons.
+- Improved UI Design with updated headings, spacing, and button styles.
+- Added a border around the folder icon button to clarify that it's a button.
+- Resolved the "Failed to display folder contents" error.
+
 ## [1.1.0] - 2024-07-23
 
 ### Added
