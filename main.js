@@ -5,7 +5,7 @@ const ignore = require("ignore");
 
 // Dynamically import electron-context-menu
 (async () => {
-  const contextMenu = (await import('electron-context-menu')).default;
+  const contextMenu = (await import("electron-context-menu")).default;
 
   contextMenu({
     showCopyImageAddress: true,
@@ -46,11 +46,11 @@ app.on("activate", () => {
   }
 });
 
-ipcMain.handle('select-folder', async (event, folderPath) => {
+ipcMain.handle("select-folder", async (event, folderPath) => {
   try {
     if (!folderPath) {
       const result = await dialog.showOpenDialog({
-        properties: ['openDirectory']
+        properties: ["openDirectory"],
       });
       folderPath = result.filePaths[0];
     }
@@ -61,14 +61,14 @@ ipcMain.handle('select-folder', async (event, folderPath) => {
 
     const getFilesAndFolders = (folderPath) => {
       const items = fs.readdirSync(folderPath);
-      return items.map(item => {
+      return items.map((item) => {
         const itemPath = path.join(folderPath, item);
         const isDirectory = fs.statSync(itemPath).isDirectory();
         return {
           name: item,
           path: itemPath,
-          type: isDirectory ? 'folder' : 'file',
-          children: isDirectory ? getFilesAndFolders(itemPath) : []
+          type: isDirectory ? "folder" : "file",
+          children: isDirectory ? getFilesAndFolders(itemPath) : [],
         };
       });
     };
@@ -76,20 +76,43 @@ ipcMain.handle('select-folder', async (event, folderPath) => {
     const filesAndFolders = getFilesAndFolders(folderPath);
     return { folderPath, filesAndFolders };
   } catch (error) {
-    console.error(`Error occurred in handler for 'select-folder': ${error.message}`);
+    console.error(
+      `Error occurred in handler for 'select-folder': ${error.message}`
+    );
     throw error;
   }
 });
 
-ipcMain.handle("process-files", async (event, selectedFiles) => {
+// ipcMain.handle("process-files", async (event, selectedFiles) => {
+//   let outputContent = "";
+
+//   selectedFiles.forEach((file) => {
+//     if (fs.statSync(file).isFile()) {
+//       const fileContent = fs.readFileSync(file, "utf-8");
+//       outputContent += `${path.basename(
+//         file
+//       )}\n\`\`\`\n${fileContent}\n\`\`\`\n\n`;
+//     }
+//   });
+
+//   return outputContent;
+// });
+
+ipcMain.handle("process-files", async (event, folderPath, selectedFiles) => {
   let outputContent = "";
 
   selectedFiles.forEach((file) => {
     if (fs.statSync(file).isFile()) {
       const fileContent = fs.readFileSync(file, "utf-8");
-      outputContent += `${path.basename(
-        file
-      )}\n\`\`\`\n${fileContent}\n\`\`\`\n\n`;
+
+      // Get the folder path (assuming the first selected file belongs to the selected folder)
+      // const folderPath = path.dirname(selectedFiles[0]);
+
+      // Calculate relative path
+      const relativeFilePath = path.relative(folderPath, file);
+
+      // Append relative file path and content to output
+      outputContent += `${relativeFilePath}\n\`\`\`\n${fileContent}\n\`\`\`\n\n`;
     }
   });
 
@@ -120,7 +143,7 @@ ipcMain.handle("get-non-ignored-files", async (event, folderPath) => {
   return files;
 });
 
-ipcMain.handle('rename-folder', async (event, oldPath, newPath) => {
+ipcMain.handle("rename-folder", async (event, oldPath, newPath) => {
   try {
     fs.renameSync(oldPath, newPath);
     return { success: true };

@@ -48,8 +48,15 @@ const displayFolderContents = async (folderPath) => {
             });
 
             renameInput.addEventListener("blur", async () => {
-              const newPath = path.join(path.dirname(item.path), renameInput.value);
-              const renameResult = await ipcRenderer.invoke('rename-folder', item.path, newPath);
+              const newPath = path.join(
+                path.dirname(item.path),
+                renameInput.value
+              );
+              const renameResult = await ipcRenderer.invoke(
+                "rename-folder",
+                item.path,
+                newPath
+              );
               if (renameResult.success) {
                 item.path = newPath;
                 folderLabel.textContent = renameInput.value;
@@ -80,6 +87,8 @@ const displayFolderContents = async (folderPath) => {
             itemElement.appendChild(checkbox);
             itemElement.appendChild(label);
 
+            const folderPath = document.getElementById("folder-path").value;
+
             // Add event listener to checkbox
             checkbox.addEventListener("change", async () => {
               const selectedFiles = Array.from(
@@ -87,6 +96,7 @@ const displayFolderContents = async (folderPath) => {
               ).map((checkbox) => checkbox.value);
               const filesContent = await ipcRenderer.invoke(
                 "process-files",
+                folderPath,
                 selectedFiles
               );
               const filesContentElement =
