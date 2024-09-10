@@ -83,30 +83,12 @@ ipcMain.handle("select-folder", async (event, folderPath) => {
   }
 });
 
-// ipcMain.handle("process-files", async (event, selectedFiles) => {
-//   let outputContent = "";
-
-//   selectedFiles.forEach((file) => {
-//     if (fs.statSync(file).isFile()) {
-//       const fileContent = fs.readFileSync(file, "utf-8");
-//       outputContent += `${path.basename(
-//         file
-//       )}\n\`\`\`\n${fileContent}\n\`\`\`\n\n`;
-//     }
-//   });
-
-//   return outputContent;
-// });
-
 ipcMain.handle("process-files", async (event, folderPath, selectedFiles) => {
   let outputContent = "";
 
   selectedFiles.forEach((file) => {
     if (fs.statSync(file).isFile()) {
       const fileContent = fs.readFileSync(file, "utf-8");
-
-      // Get the folder path (assuming the first selected file belongs to the selected folder)
-      // const folderPath = path.dirname(selectedFiles[0]);
 
       // Calculate relative path
       const relativeFilePath = path.relative(folderPath, file);

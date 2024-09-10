@@ -138,8 +138,14 @@ const displayFolderContents = async (folderPath) => {
             selectedFiles.push(checkbox.value);
           });
 
+          const folderPath = document.getElementById("folder-path").value;
+
           // Process deselected files
-          const filesContent = await ipcRenderer.invoke("process-files", []);
+          const filesContent = await ipcRenderer.invoke(
+            "process-files",
+            folderPath,
+            []
+          );
           const filesContentElement = document.getElementById("files-content");
           filesContentElement.value = filesContent;
         });
