@@ -1,6 +1,6 @@
 {
   "name": "content_collector",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Content Collector is a tool that helps you easily select project files and prepare their content for quick copy-paste into chatbots or other interfaces. Enhance productivity and streamline sharing with this convenient app.",
   "main": "main.js",
   "scripts": {
