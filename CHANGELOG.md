@@ -2,10 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.1] - 2024-09-21
+
+### Updated
+
+- Updated UI and removed unnessesary space of files content.
+
 ## [1.2.0] - 2024-09-10
 
 ### Added
 
+- Updated UI and removed unnessesary space of files content.
 - Added subfolder files path to the Files Content display.
 - Enabled right-click feature for copying and pasting text.
 - Added dark mode theme to the application.

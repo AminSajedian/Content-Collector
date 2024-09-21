@@ -94,7 +94,7 @@ ipcMain.handle("process-files", async (event, folderPath, selectedFiles) => {
       const relativeFilePath = path.relative(folderPath, file);
 
       // Append relative file path and content to output
-      outputContent += `${relativeFilePath}\n\`\`\`\n${fileContent}\n\`\`\`\n\n`;
+      outputContent += `${relativeFilePath}\n\`\`\`\n${fileContent}\`\`\`\n\n`;
     }
   });
 

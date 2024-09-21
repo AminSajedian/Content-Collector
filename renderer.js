@@ -79,6 +79,7 @@ const displayFolderContents = async (folderPath) => {
             checkbox.type = "checkbox";
             checkbox.id = item.path;
             checkbox.value = item.path;
+            checkbox.classList.add("checkbox-class");
 
             const label = document.createElement("label");
             label.htmlFor = item.path;
