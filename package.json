@@ -5,6 +5,7 @@
   "main": "main.js",
   "scripts": {
     "dev": "electron .",
+    "prebuild": "npx tailwindcss -i ./input.css -o ./output.css",
     "build": "electron-builder",
     "pack": "electron-builder --dir",
     "clean": "rimraf dist"
