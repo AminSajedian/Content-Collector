@@ -168,6 +168,14 @@ const displayFolderContents = async (folderPath) => {
   }
 };
 
+// document.addEventListener("DOMContentLoaded", () => {
+//   document.getElementById("select-folder").addEventListener("click", async () => {
+//     displayFolderContents();
+//   });
+
+//   // Add other event listeners here...
+// });
+
 document.getElementById("select-folder").addEventListener("click", async () => {
   displayFolderContents();
 });
