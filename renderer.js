@@ -176,6 +176,26 @@ const displayFolderContents = async (folderPath) => {
 //   // Add other event listeners here...
 // });
 
+// Check if the user has a previously saved theme preference
+document.addEventListener("DOMContentLoaded", () => {
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "dark") {
+    document.documentElement.classList.add("dark");
+  } else if (savedTheme === "light") {
+    document.documentElement.classList.remove("dark");
+  }
+});
+
+// Add dark mode toggle functionality
+document.getElementById("toggle-theme").addEventListener("click", () => {
+  const htmlElement = document.documentElement;
+  if (htmlElement.classList.contains("dark")) {
+    htmlElement.classList.remove("dark");
+  } else {
+    htmlElement.classList.add("dark");
+  }
+});
+
 document.getElementById("select-folder").addEventListener("click", async () => {
   displayFolderContents();
 });
@@ -202,13 +222,6 @@ document.getElementById("copy-all").addEventListener("click", async () => {
   } catch (err) {
     console.error("Failed to copy content to clipboard.", err);
   }
-});
-
-// Add dark mode toggle functionality
-document.getElementById("toggle-theme").addEventListener("click", () => {
-  const currentTheme = document.documentElement.getAttribute("data-theme");
-  const newTheme = currentTheme === "light" ? "dark" : "light";
-  document.documentElement.setAttribute("data-theme", newTheme);
 });
 
 // Add refresh button functionality
