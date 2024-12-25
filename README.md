@@ -2,6 +2,12 @@
 
 The **Content Collector** app is an Electron-based tool designed to enhance productivity by simplifying the process of selecting project files and preparing their content for quick copy-paste into chatbots or other interfaces. This convenient application streamlines file handling and sharing by allowing users to easily select files from a folder and compile their contents for efficient use. Below is a detailed breakdown of the app's components, functionality, and code structure.
 
+## Installation
+
+To install the **Content Collector** app, download and install the following file:
+
+
+
 ## Project Structure
 
 ### `index.html`

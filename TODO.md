@@ -3,7 +3,6 @@
 ## High Priority (Urgent and Important)
 - [ ] **Add subfolder files path**: Add path of subfolder files to the Files Content 
 - [ ] **Enable the right click feature**: Enable the right click feature to let the user copy or paste texts
-- [ ] **Add Dark Mode**: Implement a dark mode theme for the application.
 - [ ] **Add Delay to Modify checking path**
 - [ ] **Add loading feature**: Add loading feature to show the user that the app is processing files or something else (Add refresh button or add auto-refresh feature)
 - [ ] **Resolve having multiple subfolders bug**: Modify functionality when a user select a folder with a log of subfolders.

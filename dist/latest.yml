@@ -1,0 +1,8 @@
+version: 1.2.2
+files:
+  - url: Content-Collector-Setup-1.2.2.exe
+    sha512: hAacsnd0ly1aeOegx/eSuhwpxzm0sS8CxVaM5Pkr36qm5qQ52McKRKixb2LLLcBp8+gazi8YBwVaCkSYO9WjEw==
+    size: 78311060
+path: Content-Collector-Setup-1.2.2.exe
+sha512: hAacsnd0ly1aeOegx/eSuhwpxzm0sS8CxVaM5Pkr36qm5qQ52McKRKixb2LLLcBp8+gazi8YBwVaCkSYO9WjEw==
+releaseDate: '2024-12-25T21:23:08.960Z'

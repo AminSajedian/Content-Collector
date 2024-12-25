@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,20 +11,37 @@
     <link href="output.css" rel="stylesheet" />
   </head>
 
-  <body class="bg-gray-100 dark:bg-gray-900 px-3 py-2">
+  <body
+    class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-200 px-3 py-2"
+  >
     <div class="container mx-auto max-w-6xl">
       <div class="mb-1 flex justify-between items-center">
-        <h4 id="folder-path-title" class="text-lg flex items-center font-semibold">
+        <h4
+          id="folder-path-title"
+          class="text-lg flex items-center font-semibold"
+        >
           Folder Path
         </h4>
         <div class="settings flex space-x-2">
-          <button id="toggle-theme" class="button bg-blue-600 text-white rounded-lg p-2 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out">
+          <button
+            id="toggle-theme"
+            class="button bg-blue-600 text-white rounded-lg p-2 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out"
+            title="Toggle Light Dark Theme"          
+          >
             ☀️/🌑
           </button>
-          <button id="refresh-content" class="button bg-blue-600 text-white rounded-lg p-2 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out">
+          <button
+            id="refresh-content"
+            class="button bg-blue-600 text-white rounded-lg p-2 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out"
+            title="Refresh"          
+          >
             🔃
           </button>
-          <button id="copy-all" class="button bg-blue-600 text-white rounded-lg p-2 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out">
+          <button
+            id="copy-all"
+            class="button bg-blue-600 text-white rounded-lg p-2 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out"
+            title="Copy"          
+            >
             📋
           </button>
         </div>
@@ -43,7 +60,7 @@
         <input
           type="text"
           id="folder-path"
-          class="w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          class="w-full p-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 dark:bg-gray-800 dark-mode-folder-path"
         />
       </div>
       <div id="error-message" class="text-red-500 mt-2"></div>
@@ -56,14 +73,17 @@
         <textarea
           id="requests"
           placeholder="Enter your requests here..."
-          class="flex-1 p-2 border border-gray-300 rounded-lg shadow-sm resize-y focus:outline-none focus:ring-2 focus:ring-blue-500"
+          class="flex-1 p-2 border border-gray-300 rounded-lg shadow-sm resize-y focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 dark:bg-gray-800 dark-mode-requests"
         ></textarea>
       </div>
 
       <!-- File List section -->
       <div id="content" class="flex space-x-4 mt-4">
         <div class="flex-1">
-          <h4 id="file-list-title" class="text-lg text-center font-semibold mb-2">
+          <h4
+            id="file-list-title"
+            class="text-lg text-center font-semibold mb-2"
+          >
             File List
           </h4>
           <div
@@ -71,11 +91,19 @@
             class="bg-white dark:bg-gray-700 p-2 border border-gray-200 dark:border-gray-600 rounded-lg shadow-sm h-96"
           >
             <div class="file-list-area overflow-y-auto max-h-80">
-              <div class="file-list-controls flex justify-evenly items-center sticky top-0 bg-white dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600 z-10 p-2">
-                <button id="select-all" class="button bg-blue-600 text-white rounded-lg p-2 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out">
+              <div
+                class="file-list-controls flex justify-evenly items-center sticky top-0 bg-white dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600 z-10 p-2"
+              >
+                <button
+                  id="select-all"
+                  class="button bg-blue-600 text-white rounded-lg p-2 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out"
+                >
                   ☒ Select All
                 </button>
-                <button id="deselect-all" class="button bg-blue-600 text-white rounded-lg p-2 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out">
+                <button
+                  id="deselect-all"
+                  class="button bg-blue-600 text-white rounded-lg p-2 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out"
+                >
                   ☐ Deselect All
                 </button>
               </div>

@@ -2,15 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.2.1] - 2024-09-21
+## [1.2.2] - 2024-12-25
 
-### Updated
+- Fixed some sections in the UI Dark Mode.
+- Added installation instruction to the readme.
+
+## [1.2.1] - 2024-09-21
 
 - Updated UI and removed unnessesary space of files content.
 
 ## [1.2.0] - 2024-09-10
-
-### Added
 
 - Updated UI and removed unnessesary space of files content.
 - Added subfolder files path to the Files Content display.
@@ -20,9 +21,6 @@ All notable changes to this project will be documented in this file.
 - Added a loading feature (refresh button) to show the user that the app is processing files.
 - Resolved the bug with multiple subfolders.
 - Enabled users to rename folders within the app.
-
-### Updated
-
 - Changed the place of "Select All" and "Deselect All" buttons.
 - Improved UI Design with updated headings, spacing, and button styles.
 - Added a border around the folder icon button to clarify that it's a button.
@@ -30,18 +28,11 @@ All notable changes to this project will be documented in this file.
 
 ## [1.1.0] - 2024-07-23
 
-### Added
-
 - Added sticky "Select All" and "Deselect All" buttons to the top of the file list area to ensure they remain visible while scrolling.
 - Introduced a `resize-y` class to the `textarea` for requests to allow vertical resizing only.
-
-### Fixed
-
 - Adjusted padding and layout for the `.file-list-area` to ensure it accommodates the sticky buttons correctly.
 
 ## [1.0.0] - 2024-07-20
-
-### Initial Release
 
 - Created the initial version of the Content Collector application.
 - Implemented core features including:

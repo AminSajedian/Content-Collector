@@ -1,0 +1,31 @@
+directories:
+  output: dist
+  buildResources: assets
+appId: com.content_collector
+productName: Content Collector
+files:
+  - filter:
+      - assets/**/*
+      - node_modules/**/*
+      - index.html
+      - LICENSE
+      - main.js
+      - output.css
+      - package.json
+      - renderer.js
+win:
+  target: nsis
+  icon: assets/icon.ico
+mac:
+  target: dmg
+  icon: assets/icon.icns
+linux:
+  target:
+    - AppImage
+    - deb
+    - rpm
+  icon: assets/icon.png
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+electronVersion: 31.0.1

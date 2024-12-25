@@ -13,23 +13,24 @@ const displayFolderContents = async (folderPath) => {
       const createFileTree = (filesAndFolders, parentElement) => {
         filesAndFolders.forEach((item) => {
           const itemElement = document.createElement("div");
-          itemElement.style.marginLeft = "5px";
+          itemElement.style.marginLeft = "3px";
 
           if (item.type === "folder") {
             const folderToggle = document.createElement("span");
-            folderToggle.textContent = "►";
+            folderToggle.textContent = ">";
+            folderToggle.style.display = "inline-block";
             folderToggle.style.cursor = "pointer";
-            folderToggle.style.marginLeft = "4px";
-            folderToggle.style.marginRight = "5px";
+            folderToggle.style.paddingLeft = "4px";
+            folderToggle.style.paddingRight = "5px";
             folderToggle.addEventListener("click", () => {
               const folderContent =
                 itemElement.querySelector(".folder-content");
               if (folderContent.style.display === "none") {
                 folderContent.style.display = "block";
-                folderToggle.textContent = "▼";
+                folderToggle.style.transform = "rotate(90deg)";
               } else {
                 folderContent.style.display = "none";
-                folderToggle.textContent = "►";
+                folderToggle.style.transform = "rotate(0deg)";
               }
             });
 
@@ -82,6 +83,7 @@ const displayFolderContents = async (folderPath) => {
             checkbox.classList.add("checkbox-class");
 
             const label = document.createElement("label");
+            label.style.marginLeft = "4px";
             label.htmlFor = item.path;
             label.appendChild(document.createTextNode(item.name));
 
