@@ -6,7 +6,7 @@ The **Content Collector** app is an Electron-based tool designed to enhance prod
 
 To install the **Content Collector** app, download and install the following file:
 
-
+https://github.com/AminSajedian/Content-Collector/blob/main/dist/Content%20Collector%20Setup%201.2.2.exe
 
 ## Project Structure
 
