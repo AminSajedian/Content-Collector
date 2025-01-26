@@ -33,7 +33,10 @@
     "SnippetStream",
     "CodeExtract"
   ],
-  "author": "Amin Sajedian",
+  "author": {
+    "name": "Amin Sajedian",
+    "email": "aminsajedian@gmail.com"
+  },
   "license": "MIT",
   "dependencies": {
     "dotenv": "^16.4.5",
@@ -78,7 +81,8 @@
         "deb",
         "rpm"
       ],
-      "icon": "assets/icon.png"
+      "icon": "assets/icon.png",
+      "maintainer": "Amin Sajedian aminsajeidan@gmail.com>"
     },
     "nsis": {
       "oneClick": false,
